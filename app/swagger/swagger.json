@@ -1,0 +1,333 @@
+{
+    "swagger": "2.0",
+    "title": "MEAN architecture By Aditya Singh",
+    "description": "Swagger Api Tool for MEAN",
+    "version": "1.0.0",
+    "host": "localhost:4000",
+    "basePath": "/api",
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "securityDefinitions": {
+        "JWT": {
+            "type": "apiKey",
+            "in": "header",
+            "name": "authorization"
+        }
+    },
+    "security": [
+        {
+            "JWT": []
+        }
+    ],
+    "responses": {
+        "UnauthorizedError": {
+            "description": "Access token is missing or invalid"
+        }
+    },
+    "paths": {
+        "/userRegistration": {
+            "post": {
+                "tags": [
+                    "User Module"
+                ],
+                "summary": "add new user ",
+                "description": "add new user",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "add new user ",
+                        "required": "true",
+                        "schema": {
+                            "$ref": "#definitions/userRegistration"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#definitions/appResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#definitions/errorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/userLogin": {
+            "post": {
+                "tags": [
+                    "User Module"
+                ],
+                "summary": "login user ",
+                "description": "login user",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "login user ",
+                        "required": "true",
+                        "schema": {
+                            "$ref": "#definitions/loginUser"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#definitions/appResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#definitions/errorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/page": {
+            "post": {
+                "tags": [
+                    "Page Module"
+                ],
+                "summary": "add new page ",
+                "description": "add new page",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "add new page ",
+                        "required": "true",
+                        "schema": {
+                            "$ref": "#definitions/addPage"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#definitions/appResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#definitions/errorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/page/{page_id}": {
+            "put": {
+                "tags": [
+                    "Page Module"
+                ],
+                "summary": "Update page",
+                "description": "Update page",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Update page",
+                        "required": "true",
+                        "schema": {
+                            "$ref": "#definitions/addPage"
+                        }
+                    },
+                    {
+                        "name": "page_id",
+                        "in": "path",
+                        "required": "true",
+                        "schema": {
+                            "$ref": "#definitions/updatePage"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#definitions/appResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#definitions/errorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/pages": {
+            "get": {
+                "tags": [
+                    "Page Module"
+                ],
+                "summary": "List the pages ",                
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#definitions/appResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#definitions/errorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/pages/{page_id}": {
+            "delete": {
+                "tags": [
+                    "Page Module"
+                ],
+                "summary": "List the pages ",
+                "parameters": [
+                    {
+                        "name": "page_id",
+                        "in": "path",
+                        "required": "true",
+                        "schema": {
+                            "$ref": "#definitions/updatePage"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#definitions/appResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "Error",
+                        "schema": {
+                            "$ref": "#definitions/errorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "_comment": "Complex objects have schema definitions",
+    "definitions": {
+        "appResponse": {
+            "required": "message",
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "number"
+                }
+            }
+        },
+        "errorResponse": {
+            "required": "message",
+            "properties": {
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "userRegistration": {
+            "type": "object",
+            "properties": {
+                "firstname": {
+                    "type": "string"
+                },
+                "lastname": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "loginUser": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "addPage": {
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "content": {
+                    "type": "string"
+                },
+                "keywords": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "keyword": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "updatePage": {
+            "type": "object",
+            "properties": {
+                "page_id": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
